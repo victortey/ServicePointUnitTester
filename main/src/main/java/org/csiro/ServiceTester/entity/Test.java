@@ -4,14 +4,19 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="Test")
+@XmlRootElement(name = "Test")
 public class Test {
+
 	private String xpath;
 	private String evaluationType;
 	private String expected;
 	private String id;
 
-	@XmlElement(name="expected")
+	public enum EvaluationType {
+		COUNT, EVALUATE;
+	}
+
+	@XmlElement(name = "expected")
 	public void setExpected(String expected) {
 		this.expected = expected;
 	}
@@ -20,16 +25,27 @@ public class Test {
 		return expected;
 	}
 
-	@XmlElement(name="evaluationType")
+	@XmlElement(name = "evaluationType")
 	public void setEvaluationType(String evaluationType) {
-		this.evaluationType = evaluationType;
+		this.evaluationType=evaluationType;
 	}
 
 	public String getEvaluationType() {
-		return evaluationType;
+		return this.evaluationType;
 	}
 
-	@XmlElement(name="xpath")
+
+	public EvaluationType getEvaluationTypeEnum() {
+		if (evaluationType.toUpperCase().equals("COUNT")) {
+			return EvaluationType.COUNT;
+		} else if (evaluationType.toUpperCase().equals("EVALUATE")) {
+			return EvaluationType.EVALUATE;
+		}else{
+			return null;
+		}
+	}
+
+	@XmlElement(name = "xpath")
 	public void setXpath(String xpath) {
 		this.xpath = xpath;
 	}
@@ -38,7 +54,7 @@ public class Test {
 		return xpath;
 	}
 
-	@XmlAttribute(name="id")
+	@XmlAttribute(name = "id")
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -46,6 +62,5 @@ public class Test {
 	public String getId() {
 		return id;
 	}
-
 
 }

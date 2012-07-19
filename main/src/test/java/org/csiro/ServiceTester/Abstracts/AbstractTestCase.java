@@ -21,6 +21,8 @@ import junit.framework.TestCase;
 import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.csiro.ServiceTester.util.HttpServiceCaller;
 import org.custommonkey.xmlunit.SimpleNamespaceContext;
 import org.custommonkey.xmlunit.XMLUnit;
@@ -53,6 +55,8 @@ public abstract class AbstractTestCase extends TestCase{
 					put("xlink", "http://www.w3.org/1999/xlink");
 					put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 					put("wms", "http://www.opengis.net/wms"); // NC - wms added
+					put("er","urn:cgi:xmlns:GGIC:EarthResource:1.1");
+					put("gsml","http://example.org");
 																// for wms tests
 				}
 			});
@@ -62,15 +66,6 @@ public abstract class AbstractTestCase extends TestCase{
 		super(s);
 	}
 
-	protected Document dom(InputStream input, boolean skipDTD)
-			throws ParserConfigurationException, SAXException, IOException {
-
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true);
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		return builder.parse(input);
-
-	}
 
 	protected Document getRequest(String request) throws ConnectException, ConnectTimeoutException, UnknownHostException, Exception {
 		HttpServiceCaller caller= new HttpServiceCaller();
@@ -79,12 +74,10 @@ public abstract class AbstractTestCase extends TestCase{
 		List<NameValuePair> options = new ArrayList<NameValuePair>();
 		options.addAll(this.extractQueryParams(request));
 		method.setQueryString(options.toArray(new NameValuePair[options.size()]));
-		InputStream result=caller.getMethodResponseAsStream(method);
+		String response=caller.getMethodResponseAsString(method);
 
-		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-		Document doc=docBuilder.parse(result);
-		result.close();
+		Document doc=XMLUnit.buildControlDocument(response);
+
 		return doc;
 	}
 
@@ -113,8 +106,13 @@ public abstract class AbstractTestCase extends TestCase{
         return params;
     }
 
-	protected Document postRequest(String request, String xml) {
-		return null;
+	protected Document postRequest(String request, String xml) throws ConnectException, ConnectTimeoutException, UnknownHostException, Exception {
+		HttpServiceCaller caller= new HttpServiceCaller();
+		PostMethod method=new PostMethod(request);
+		method.setRequestEntity(new StringRequestEntity(xml,"text/xml", "ISO-8859-1"));
+		String response=caller.getMethodResponseAsString(method);
+		Document doc=XMLUnit.buildControlDocument(response);
+		return doc;
 	}
 
 	protected String prettyString(Document document) {

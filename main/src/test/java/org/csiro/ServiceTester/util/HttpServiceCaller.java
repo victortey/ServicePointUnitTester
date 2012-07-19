@@ -155,6 +155,7 @@ public class HttpServiceCaller {
         while((line = reader.readLine()) != null) {
             stringBuffer.append(line);
         }
+        stream.close();
         return stringBuffer.toString();
     }
 

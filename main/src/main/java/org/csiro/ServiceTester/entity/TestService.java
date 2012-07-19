@@ -14,6 +14,12 @@ public class TestService {
 	private String postBody;
 	private ArrayList<Test> Tests;
 
+
+
+	public static enum Type {
+		GET, POST;
+	}
+
 	@XmlAttribute
 	public void setUrl(String url) {
 		this.url = url;
@@ -25,11 +31,22 @@ public class TestService {
 
 	@XmlElement(name="type")
 	public void setType(String type) {
-		this.type = type;
+		this.type=type;
 	}
 
 	public String getType() {
 		return type;
+	}
+
+	public Type getTypeEnum() {
+		if(type.toUpperCase().equals("GET")){
+			return Type.GET;
+		}else if(type.toUpperCase().equals("POST")){
+			return Type.POST;
+		}else{
+			return null;
+		}
+
 	}
 
 	@XmlElement(name="postBody")
