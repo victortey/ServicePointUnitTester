@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuite>	
-	<TestService url='http://geossdi.dmp.wa.gov.au/services/wfs?request=GetFeature&amp;version=1.1.0&amp;typename=er:Commodity&amp;maxfeatures=20'>
+	<TestService id='testService1' url='http://geossdi.dmp.wa.gov.au/services/wfs?request=GetFeature&amp;version=1.1.0&amp;typename=er:Commodity&amp;maxfeatures=20'>
 		<type>GET</type>
 		<Test id='1'>			
 			<xpath>//er:Commodity[@gml:id='er.commodity.S0000001.121']/gml:name</xpath>
@@ -13,7 +13,20 @@
 			<expected>http://geossdi.dmp.wa.gov.au/resource/feature/gswa/commodity/S0000002/121</expected>
 		</Test>
 	</TestService>
-	<TestService url='http://geossdi.dmp.wa.gov.au/services/wfs'>
+	<TestService id='testService2' url='http://geossdi.dmp.wa.gov.au/services/wfs?request=GetFeature&amp;version=1.1.0&amp;typename=er:Commodity&amp;maxfeatures=20'>
+		<type>GET</type>
+		<Test id='1'>			
+			<xpath>//er:Commodity[@gml:id='er.commodity.S0000001.121']/gml:name</xpath>
+			<evaluationType>COUNT</evaluationType>
+			<expected>1</expected>
+		</Test>
+		<Test id='2'>			
+			<xpath>//er:Commodity[@gml:id='er.commodity.S0000002.121']/gml:name</xpath>
+			<evaluationType>EVALUATE</evaluationType>
+			<expected>http://geossdi.dmp.wa.gov.au/resource/feature/gswa/commodity/S0000002/121</expected>
+		</Test>
+	</TestService>
+	<TestService id='testService3' url='http://geossdi.dmp.wa.gov.au/services/wfs'>
 		<type>POST</type>
 		<postBody>
 			<![CDATA[ 				

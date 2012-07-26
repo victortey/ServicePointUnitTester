@@ -26,14 +26,16 @@ public class DynamicTest extends AbstractTestCase {
 		this.testService = testService;
 	}
 
-	public void runMe() throws ConnectException, ConnectTimeoutException, UnknownHostException, Exception {
+	public void runMe() throws Throwable {
+		this.setName(testService.getId());
 		Document doc=null;
+		try{
 		if(testService.getTypeEnum().equals(TestService.Type.GET)){
 			doc=this.getRequest(testService.getUrl());
 		}else if (testService.getTypeEnum().equals(TestService.Type.POST)){
 			doc=this.postRequest(testService.getUrl(), testService.getPostBody());
 		}
-		log.info(this.prettyString(doc));
+
 
 		for(Test test:testService.getTests()){
 			if(test.getEvaluationTypeEnum().equals(Test.EvaluationType.COUNT)){
@@ -45,7 +47,12 @@ public class DynamicTest extends AbstractTestCase {
 			}
 		}
 
-		assertTrue(true);
+
+		}catch(Throwable e){
+			log.error("\nTest Failure:" + testService.getUrl());
+			log.error(this.prettyString(doc));
+			throw e;
+		}
 	}
 
 

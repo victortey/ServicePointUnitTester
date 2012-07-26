@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="TestService")
 public class TestService {
 
+	private String id;
 	private String url;
 	private String type;
 	private String postBody;
@@ -65,6 +66,15 @@ public class TestService {
 
 	public ArrayList<Test> getTests() {
 		return Tests;
+	}
+
+	@XmlAttribute(name="id")
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 }
