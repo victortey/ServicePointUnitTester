@@ -196,7 +196,7 @@
 		<Test id='2'>			
 			<xpath>//gsml:Borehole[@gml:id='gsml.borehole.WTB5']/gml:name[2]</xpath>
 			<evaluationType>EVALUATE</evaluationType>
-			<expected>WTB5 TEST</expected>			
+			<expected>>WTB5 TEST</expected>			
 		</Test>
 		<Test id='3'>			
 			<xpath>//gml:featureMembers/gsml:Borehole</xpath>

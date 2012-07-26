@@ -43,8 +43,7 @@ public abstract class AbstractTestCase extends TestCase{
 	private XpathEngine xpathEngine;
 
 	@SuppressWarnings("serial")
-	private final Map<String, String> WFS_NAMESPACES = Collections
-			.unmodifiableMap(new HashMap<String, String>() {
+	private final Map<String, String> WFS_NAMESPACES = new HashMap<String, String>() {
 				{
 					put("wfs", "http://www.opengis.net/wfs");
 					put("ows", "http://www.opengis.net/ows");
@@ -56,10 +55,11 @@ public abstract class AbstractTestCase extends TestCase{
 					put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 					put("wms", "http://www.opengis.net/wms"); // NC - wms added
 					put("er","urn:cgi:xmlns:GGIC:EarthResource:1.1");
-					put("gsml","http://example.org");
+					put("gsml","urn:cgi:xmlns:CGI:GeoSciML:2.0");
+					put("sa","http://www.opengis.net/sampling/1.0");
 																// for wms tests
 				}
-			});
+			};
 
 
 	public AbstractTestCase(String s) {
@@ -229,4 +229,7 @@ public abstract class AbstractTestCase extends TestCase{
         }
     }
 
+    protected void addNamespace(String prefix,String uri){
+    	this.WFS_NAMESPACES.put(prefix, uri);
+    }
 }

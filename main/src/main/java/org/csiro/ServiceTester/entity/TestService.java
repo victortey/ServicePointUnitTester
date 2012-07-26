@@ -11,6 +11,7 @@ public class TestService {
 
 	private String id;
 	private String url;
+	private Namespaces namespaces;
 	private String type;
 	private String postBody;
 	private ArrayList<Test> Tests;
@@ -75,6 +76,15 @@ public class TestService {
 
 	public String getId() {
 		return id;
+	}
+
+	@XmlElement(name="namespaces")
+	public void setNamespaces(Namespaces namespaces) {
+		this.namespaces = namespaces;
+	}
+
+	public Namespaces getNamespaces() {
+		return namespaces;
 	}
 
 }
