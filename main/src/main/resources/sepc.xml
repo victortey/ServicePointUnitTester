@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuite>		
-	<TestService id='Basic Borehole Query' url='http://130.116.24.254:8080/nvcl-geoserver-test/wfs'>
+	<TestService id='Basic Borehole Query' url='http://gs-test1.arrc.csiro.au:8080/nvcl-geoserver-test/wfs'>
 		<!--examples for namespace to be overriden or new namespace-->
 		<!-- wfs: 	http://www.opengis.net/wfs
 			 ows: 	http://www.opengis.net/ows
@@ -118,7 +118,7 @@
 			<expected>1</expected>			
 		</Test>
 	</TestService>	
-	<TestService id='BoreHole Get Request Test' url='http://130.116.24.254:8080/nvcl-geoserver-test/wfs?request=getFeature&amp;version=1.1.0&amp;typeName=gsml:Borehole&amp;maxFeatures=10&amp;featureid=gsml.borehole.WTB5'>
+	<TestService id='BoreHole Get Request Test' url='http://gs-test1.arrc.csiro.au:8080/nvcl-geoserver-test/wfs?request=getFeature&amp;version=1.1.0&amp;typeName=gsml:Borehole&amp;maxFeatures=10&amp;featureid=gsml.borehole.WTB5'>
 		<type>GET</type>
 		<Test id='1'>			
 			<xpath>//gsml:Borehole[@gml:id='gsml.borehole.WTB5']/gml:name</xpath>
@@ -151,7 +151,7 @@
 			<expected>1</expected>			
 		</Test>
 	</TestService>
-	<TestService id='Advance Borehole Query' url='http://130.116.24.254:8080/nvcl-geoserver-test/wfs'>
+	<TestService id='Advance Borehole Query' url='http://gs-test1.arrc.csiro.au:8080/nvcl-geoserver-test/wfs'>
 		<type>POST</type>
 		<postBody>
 			<![CDATA[ 				
