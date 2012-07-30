@@ -30,6 +30,7 @@ public class DynamicTest extends AbstractTestCase {
 
 	public void runMe() throws Throwable {
 		this.setName(testService.getId());
+		log.info("Testing: " + testService.getId());
 		if(testService.getNamespaces()!=null){
 			ArrayList<Namespace> ns = testService.getNamespaces()
 					.getNamespace();
@@ -62,9 +63,9 @@ public class DynamicTest extends AbstractTestCase {
 			}
 
 		} catch (Throwable e) {
-			log.error("\nTest Failure:" + testService.getUrl());
-			log.error(this.prettyString(doc));
-			e.printStackTrace();
+			log.debug("\nTest Failure:" + testService.getUrl());
+			log.debug(this.prettyString(doc));
+			log.debug(e.getMessage());
 			throw e;
 		}
 	}
