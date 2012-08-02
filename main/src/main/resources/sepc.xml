@@ -405,7 +405,7 @@
 		<Test id='1'>
 			<xpath>//gml:featureMembers/er:MiningFeatureOccurrence</xpath>
 			<evaluationType>COUNT</evaluationType>
-			<expected>1</expected>
+			<expected>2</expected>
 		</Test>
 	</TestService>	
 </TestSuite>
